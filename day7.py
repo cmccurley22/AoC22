@@ -18,8 +18,7 @@ while l < len(input):
         l += 1
         while l < len(input) and input[l][0] != "$":
             struct["/".join(dir)].append(input[l])
-            if l < len(input):
-                l += 1
+            if l < len(input): l += 1
 
 def size(dir):
     if all([file[0].isdigit() for file in struct[dir]]):
