@@ -1,7 +1,7 @@
 with open("input7.txt") as f:
     input = f.read().split("\n")
 
-dir = []
+dir = ""
 struct = {}
 
 l = 0
@@ -9,16 +9,17 @@ while l < len(input):
     line = input[l]
     if line[0] == "$":
         if line.split(" ")[1] == "cd":
-            if line.split(" ")[2] == "..": dir.pop()
-            elif line.split(" ")[2] == "/": dir.append("~")
-            else: dir.append(line.split(" ")[2])
+            if line.split(" ")[2] == "..": dir = dir.rsplit("/", 1)[0]
+            elif line.split(" ")[2] == "/": dir += "~"
+            else: dir += "/" + line.split(" ")[2]
         l += 1
     else:
-        struct["/".join(dir)] = [line]
+        struct[dir] = [line]
         l += 1
         while l < len(input) and input[l][0] != "$":
-            struct["/".join(dir)].append(input[l])
+            struct[dir].append(input[l])
             if l < len(input): l += 1
+
 
 def size(dir):
     if all([file[0].isdigit() for file in struct[dir]]):
