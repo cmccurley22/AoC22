@@ -20,7 +20,6 @@ while l < len(input):
             struct[dir].append(input[l])
             if l < len(input): l += 1
 
-
 def size(dir):
     if all([file[0].isdigit() for file in struct[dir]]):
         return sum(int(file.split(" ")[0]) for file in struct[dir])
@@ -37,10 +36,7 @@ def size(dir):
         return total_size
 
 small_size = 0
-outer_size = size("~")
-unused_space = 70000000 - outer_size
-needed_space = 30000000 - unused_space
-
+needed_space = size("~") - 40000000
 free = []
 
 for file in struct:
